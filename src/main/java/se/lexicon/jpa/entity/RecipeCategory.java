@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class RecipeCategory {
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
-    //@Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255)
     private String category;
 
-    // @ManyToMany
+    @ManyToMany
     private List<Recipe> recipes;
 
     public RecipeCategory() {

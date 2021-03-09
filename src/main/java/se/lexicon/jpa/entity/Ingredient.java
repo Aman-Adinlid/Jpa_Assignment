@@ -3,12 +3,12 @@ package se.lexicon.jpa.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class Ingredient {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ingredientId;
-   // @Column(nullable = false, length = 255, unique = true)
+   @Column(nullable = false, length = 255, unique = true)
     private String ingredientName;
 
     public Ingredient() {

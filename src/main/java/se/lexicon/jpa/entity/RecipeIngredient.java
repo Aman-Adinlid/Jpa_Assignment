@@ -6,20 +6,20 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
-//@Entity
+@Entity
 public class RecipeIngredient {
-    //@Id
-   // @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-   // @Column(name = "id", updatable = false, nullable = false)
+    @Id
+   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+   @Column(name = "id", updatable = false, nullable = false)
     private UUID recipeIngredientId;
 
-   // @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+   @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Ingredient ingredient;
 
     private double amount;
     private Measurement measurement;
 
-   // @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+   @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Recipe recipe;
 
     public RecipeIngredient() {

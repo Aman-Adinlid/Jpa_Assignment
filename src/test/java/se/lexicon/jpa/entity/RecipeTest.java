@@ -23,8 +23,6 @@ public class RecipeTest {
         recipe.getRecipeIngredients();
         recipe.getInstruction();
         recipe.getRecipeCategories();
-
-
     }
 
     @Test
