@@ -6,15 +6,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class RecipeTest {
     Recipe recipe;
-
+    List<RecipeIngredient> recipeIngredients;
+    RecipeInstruction instruction;
+    List<RecipeCategory> recipeCategory;
 
     @BeforeEach
     public void setup() {
-        RecipeInstruction instruction = new RecipeInstruction();
-        recipe = new Recipe();
+        Recipe recipe = new Recipe(1, "rice", recipeIngredients, instruction, recipeCategory);
+        recipe.getRecipeId();
+        recipe.getRecipeName();
+        recipe.getRecipeIngredients();
+        recipe.getInstruction();
+        recipe.getRecipeCategories();
 
 
     }
@@ -27,4 +35,5 @@ public class RecipeTest {
 
     }
 }
+
 

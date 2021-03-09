@@ -13,7 +13,7 @@ public class IngredientTest {
 
     @BeforeEach
     public void setup() {
-        ingredient = new Ingredient(1, "Pork");
+        ingredient = new Ingredient(1, "Potato");
 
     }
 
@@ -21,13 +21,13 @@ public class IngredientTest {
     @DisplayName("Test1 create ingredient")
     public void test1() {
         Assertions.assertEquals(1, ingredient.getIngredientId());
-        Assertions.assertEquals("Pork", ingredient.getIngredientName());
+        Assertions.assertEquals("Potato", ingredient.getIngredientName());
     }
 
     @Test
     @DisplayName("Test 2: test equal method")
     public void test2() {
-        Ingredient expected = new Ingredient(1, "Pork");
+        Ingredient expected = new Ingredient(1, "Potato");
         Ingredient actual = ingredient;
         Assertions.assertEquals(expected, actual);
     }
@@ -35,7 +35,7 @@ public class IngredientTest {
     @Test
     @DisplayName("Test 3: test hashcode Ingredient")
     public void test_hashCode() {
-        Ingredient expected = new Ingredient(1, "Pork");
+        Ingredient expected = new Ingredient(1, "Potato");
         Ingredient actual = ingredient;
         Assertions.assertEquals(expected.hashCode(), actual.hashCode());
     }
