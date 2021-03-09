@@ -4,24 +4,31 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+//@Entity
 public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
-    @Column(nullable = false, length = 255)
+   // @Column(nullable = false, length = 255)
     private String recipeName;
 
-    @OneToMany(mappedBy = "recipe")
+   // @OneToMany(mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredients;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+  //  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private RecipeInstruction instruction;
 
-    @ManyToMany
+   // @ManyToMany
     private List<RecipeCategory> recipeCategories;
 
     public Recipe() {
+    }
+
+    public Recipe(String recipeName, List<RecipeIngredient> recipeIngredients, RecipeInstruction instruction, List<RecipeCategory> recipeCategories) {
+        this.recipeName = recipeName;
+        this.recipeIngredients = recipeIngredients;
+        this.instruction = instruction;
+        this.recipeCategories = recipeCategories;
     }
 
     public Recipe(int recipeId, String recipeName, List<RecipeIngredient> recipeIngredients, RecipeInstruction instruction, List<RecipeCategory> recipeCategories) {

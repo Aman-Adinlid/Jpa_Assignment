@@ -1,29 +1,38 @@
 package se.lexicon.jpa.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
-@Entity
+//@Entity
 public class RecipeIngredient {
-    @Id
-    @Column(nullable = false, length = 255)
-    private String recipeIngredientId;
+    //@Id
+   // @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+   // @Column(name = "id", updatable = false, nullable = false)
+    private UUID recipeIngredientId;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "ingredient_id")
+   // @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Ingredient ingredient;
 
     private double amount;
     private Measurement measurement;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "recipe_id")
+   // @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Recipe recipe;
 
     public RecipeIngredient() {
     }
 
-    public RecipeIngredient(String recipeIngredientId, Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
+    public RecipeIngredient(Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
+        this.ingredient = ingredient;
+        this.amount = amount;
+        this.measurement = measurement;
+        this.recipe = recipe;
+    }
+
+    public RecipeIngredient(UUID recipeIngredientId, Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
         this.recipeIngredientId = recipeIngredientId;
         this.ingredient = ingredient;
         this.amount = amount;
@@ -31,11 +40,11 @@ public class RecipeIngredient {
         this.recipe = recipe;
     }
 
-    public String getRecipeIngredientId() {
+    public UUID getRecipeIngredientId() {
         return recipeIngredientId;
     }
 
-    public void setRecipeIngredientId(String recipeIngredientId) {
+    public void setRecipeIngredientId(UUID recipeIngredientId) {
         this.recipeIngredientId = recipeIngredientId;
     }
 
