@@ -1,6 +1,7 @@
 package se.lexicon.jpa.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -50,5 +51,16 @@ public class Ingredient {
     @Override
     public int hashCode() {
         return Objects.hash(ingredientId, ingredientName);
+    }
+
+    @OneToMany(mappedBy = "ingredient")
+    private Collection<RecipeIngredient> recipeIngredient;
+
+    public Collection<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
+    }
+
+    public void setRecipeIngredient(Collection<RecipeIngredient> recipeIngredient) {
+        this.recipeIngredient = recipeIngredient;
     }
 }

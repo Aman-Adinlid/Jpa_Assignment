@@ -7,22 +7,32 @@ import java.util.Objects;
 @Entity
 public class Recipe {
     @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
-   @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255)
     private String recipeName;
+
 
     @OneToMany(mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredients;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "recipe_instruction_id", unique = true)
     private RecipeInstruction instruction;
 
-   @ManyToMany
+    @ManyToMany
+    @JoinTable(name = "recipe_recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_category_id"))
     private List<RecipeCategory> recipeCategories;
 
     public Recipe() {
     }
+
+    public Recipe(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
 
     public Recipe(String recipeName, List<RecipeIngredient> recipeIngredients, RecipeInstruction instruction, List<RecipeCategory> recipeCategories) {
         this.recipeName = recipeName;
@@ -30,6 +40,18 @@ public class Recipe {
         this.instruction = instruction;
         this.recipeCategories = recipeCategories;
     }
+
+    public Recipe(int recipeId, String recipeName) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+    }
+
+    public Recipe(int recipeId, String recipeName, List<RecipeCategory> recipeCategories) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.recipeCategories = recipeCategories;
+    }
+
 
     public Recipe(int recipeId, String recipeName, List<RecipeIngredient> recipeIngredients, RecipeInstruction instruction, List<RecipeCategory> recipeCategories) {
         this.recipeId = recipeId;
@@ -90,5 +112,16 @@ public class Recipe {
     @Override
     public int hashCode() {
         return Objects.hash(recipeId, recipeName, recipeIngredients, instruction, recipeCategories);
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeId=" + recipeId +
+                ", recipeName='" + recipeName + '\'' +
+                ", recipeIngredients=" + recipeIngredients +
+                ", instruction=" + instruction +
+                ", recipeCategories=" + recipeCategories +
+                '}';
     }
 }

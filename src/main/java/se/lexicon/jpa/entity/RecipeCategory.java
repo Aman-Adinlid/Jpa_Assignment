@@ -6,28 +6,34 @@ import java.util.Objects;
 
 @Entity
 public class RecipeCategory {
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
     @Column(nullable = false, length = 255)
     private String category;
 
-    @ManyToMany
-    private List<Recipe> recipes;
-
     public RecipeCategory() {
+    }
+
+
+    public RecipeCategory(String category) {
+        this.category = category;
+    }
+
+    public RecipeCategory(int categoryId, String category) {
+        this.categoryId = categoryId;
+        this.category = category;
     }
 
     public RecipeCategory(String category, List<Recipe> recipes) {
         this.category = category;
-        this.recipes = recipes;
     }
 
-    public RecipeCategory(int categoryId, String category, List<Recipe> recipes) {
-        this.categoryId = categoryId;
+    public RecipeCategory(int recipe_categoryId, String category, List<Recipe> recipes) {
+        this.categoryId = recipe_categoryId;
         this.category = category;
-        this.recipes = recipes;
     }
+
 
     public int getCategoryId() {
         return categoryId;
@@ -45,24 +51,24 @@ public class RecipeCategory {
         this.category = category;
     }
 
-    public List<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecipeCategory that = (RecipeCategory) o;
-        return categoryId == that.categoryId && Objects.equals(category, that.category) && Objects.equals(recipes, that.recipes);
+        return categoryId == that.categoryId && Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryId, category, recipes);
+        return Objects.hash(categoryId, category);
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeCategory{" +
+                "categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                '}';
     }
 }

@@ -1,25 +1,20 @@
 package se.lexicon.jpa.entity;
 
 public enum Measurement {
-    TBSP(1), TSP(2), G(3), HG(4), KG(5), ML(6), CL(7), DL(8);
+    TBSP(), TSP(), G(), HG(), KG(), ML(), CL(), DL();
 
-    private int measurement;
+    private String measurement;
 
     Measurement() {
 
     }
 
-    Measurement(int measurement) {
+    Measurement(String measurement) {
         this.measurement = measurement;
     }
 
-    public int getMeasurement() {
+
+    public String getMeasurement() {
         return measurement;
     }
-
-    public void setMeasurement(int measurement) {
-        this.measurement = measurement;
-    }
-
-
 }
