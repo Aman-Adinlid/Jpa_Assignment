@@ -1,18 +1,24 @@
 package se.lexicon.jpa.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import se.lexicon.jpa.entity.Ingredient;
+import org.springframework.data.repository.query.Param;
 import se.lexicon.jpa.entity.Recipe;
+import se.lexicon.jpa.entity.RecipeCategory;
+import se.lexicon.jpa.entity.RecipeIngredient;
 
 import java.util.List;
 
 
 public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
-    List<Recipe> searchRecipeName(String recipeName);
+    @Query("select a from Recipe a where a.recipeName like '%recipeName%'")
+    List<Recipe> findRecipeByRecipeName (@Param("recipeName") String recipeName);
 
-    List<Recipe> searchAllRecipes(Ingredient name);
+    @Query("select a from RecipeIngredient a where a.ingredient = :ingredient")
+    List<RecipeIngredient> searchAllRecipeByIngredientQuery(@Param("ingredient") String ingredient);
 
-    List<Recipe> searchAllRecipes(Recipe category);
+    @Query("select a from RecipeCategory a where a.category = :categoryName")
+    List<RecipeCategory> searchAllRecipeByCategoryQuery(@Param("categoryName") String categoryName);
 
 }

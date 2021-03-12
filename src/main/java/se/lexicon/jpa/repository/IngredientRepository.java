@@ -5,8 +5,12 @@ import se.lexicon.jpa.entity.Ingredient;
 
 import java.util.List;
 
-public interface IngredientRepository extends CrudRepository<Ingredient,Integer> {
 
-  List<Ingredient> searchByName(String ingredientName);
+public interface IngredientRepository extends CrudRepository<Ingredient, Integer> {
+
+
+    List<Ingredient> findIngredientByIngredient(String ingredient);
+
+    List<Ingredient> findIngredientsByIngredientContains(String ingredient);
 
 }
